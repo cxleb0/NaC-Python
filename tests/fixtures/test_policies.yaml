@@ -1,0 +1,11 @@
+policies:
+
+  any_any:
+    enabled: true
+    severity: HIGH
+    message: Any-Any Rule Detected.
+
+  safe_rule:
+    enabled: true
+    severity: HIGH
+    message: This is a good rule.

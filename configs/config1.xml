@@ -1,0 +1,37 @@
+<config>
+  
+  <devices>
+    
+    <entry name="localhost.domain">
+
+      <vsys>
+        
+        <entry name="vsys1">
+          
+          <rulebase>
+            
+            <security>
+              
+              <rules>
+                
+                <entry name="Allow Web">
+                </entry>
+                <entry name="Allow DNS">
+                </entry>
+                <entry name="Restricted Internet Access">
+                </entry>
+              </rules>
+              
+            </security>
+            
+          </rulebase>
+          
+        </entry>
+        
+      </vsys>
+      
+    </entry>
+    
+  </devices>
+  
+</config>  

@@ -1,0 +1,21 @@
+policies:
+
+  any_any:
+    enabled: true
+    severity: HIGH
+    message: Any-Any Rule Detected.
+    
+  logging:
+    enabled: true
+    severity: MEDIUM
+    message: Session-End-Logging disabled.
+    
+  description:
+    enabled: true
+    severity: MEDIUM
+    message: Security rule missing description.
+    
+  disabled:
+    enabled: true
+    severity: LOW
+    message: Security Rule is disabled.
