@@ -7,6 +7,7 @@ from modules.checks import (
     check_logging,
     check_disabled
 )
+from modules.reporter import generate_report
 
 
 xml_content = load_config()
@@ -42,7 +43,9 @@ for finding in findings:
         f"{finding['message']}"
 
     )
-
+print("Generating Report...")
+generate_report(findings)
+print("Report Generated.")
 
 
 
