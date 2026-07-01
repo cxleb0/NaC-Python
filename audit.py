@@ -7,8 +7,13 @@ from modules.checks import (
     check_logging,
     check_disabled
 )
-from modules.reporter import generate_report
-
+from modules.reporter import (
+    generate_csv,
+    generate_json,
+    generate_xml,
+    summarize_findings,
+    print_report
+)
 
 xml_content = load_config()
 rules = get_rules(xml_content)
@@ -43,8 +48,12 @@ for finding in findings:
         f"{finding['message']}"
 
     )
-print("Generating Report...")
-generate_report(findings)
+print("Generating Reports...")
+generate_csv(findings)
+generate_json(findings)
+generate_xml(findings)
+summarize_findings(findings)
+print_report(findings)
 print("Report Generated.")
 
 
