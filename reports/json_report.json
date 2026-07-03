@@ -1,0 +1,20 @@
+[
+    {
+        "rule": "Allow DNS",
+        "issue": "Missing Description",
+        "severity": "MEDIUM",
+        "message": "Security rule missing description."
+    },
+    {
+        "rule": "Test Rule 2",
+        "issue": "Disabled rule",
+        "severity": "LOW",
+        "message": "Security Rule is disabled."
+    },
+    {
+        "rule": "Any Any Rule",
+        "issue": "Any Any rule found",
+        "severity": "HIGH",
+        "message": "Any-Any Rule Detected."
+    }
+]

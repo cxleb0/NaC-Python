@@ -1,0 +1,4 @@
+rule,issue,severity,message
+Allow DNS,Missing Description,MEDIUM,Security rule missing description.
+Test Rule 2,Disabled rule,LOW,Security Rule is disabled.
+Any Any Rule,Any Any rule found,HIGH,Any-Any Rule Detected.

@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<report><finding><rule>Allow DNS</rule><issue>Missing Description</issue><severity>MEDIUM</severity><message>Security rule missing description.</message></finding><finding><rule>Test Rule 2</rule><issue>Disabled rule</issue><severity>LOW</severity><message>Security Rule is disabled.</message></finding><finding><rule>Any Any Rule</rule><issue>Any Any rule found</issue><severity>HIGH</severity><message>Any-Any Rule Detected.</message></finding></report>
