@@ -2,19 +2,19 @@
     {
         "rule": "Allow DNS",
         "issue": "Missing Description",
-        "severity": "MEDIUM",
-        "message": "Security rule missing description."
+        "message": "Security rule missing description.",
+        "severity": "MEDIUM"
     },
     {
         "rule": "Test Rule 2",
         "issue": "Disabled rule",
-        "severity": "LOW",
-        "message": "Security Rule is disabled."
+        "message": "Security Rule is disabled.",
+        "severity": "LOW"
     },
     {
         "rule": "Any Any Rule",
         "issue": "Any Any rule found",
-        "severity": "HIGH",
-        "message": "Any-Any Rule Detected."
+        "message": "Any-Any Rule Detected.",
+        "severity": "HIGH"
     }
 ]
