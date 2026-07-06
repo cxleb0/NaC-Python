@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 @dataclass
-class FirewallRules:
+class FirewallRule:
     name:str
     source:list[str]
     destination:list[str]
@@ -9,11 +9,19 @@ class FirewallRules:
     description: str
     disabled: bool
     log_end: bool
-
-class Findings:
+    
+@dataclass
+class Finding:
     rule: str
     issue: str
     message: str
-    severity: str 
+    severity: str
+
+@dataclass
+class Policy:
+   name: str
+   enabled: bool
+   severity: str
+   message: str
 
     
