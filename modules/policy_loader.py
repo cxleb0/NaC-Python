@@ -12,7 +12,7 @@ def load_policies() -> dict[str,Policy]:
         data = yaml.safe_load(file)
 
     policies = {}
-    for name, config in data["policies"].items(): #.items() makes the dict an iterable of tupels
+    for name, config in data["policies"].items():
         policies[name] = Policy(
             name=name,
             enabled=config.get("enabled", False),
