@@ -1,27 +1,27 @@
 import csv
 import json
-from xml.etree.ElementTree import Element, tostring, SubElement, ElementTree
+from xml.etree.ElementTree import Element, SubElement, ElementTree
 from pathlib import Path
 from modules.module import Finding
 from dataclasses import asdict
-BASE_DIR = Path(__file__).resolve().parent.parent
-csv_report = BASE_DIR / "reports" / "csv_report.csv"
-json_report = BASE_DIR / "reports" / "json_report.json"
-xml_report = BASE_DIR / "reports" / "xml_report.xml"
+#BASE_DIR = Path(__file__).resolve().parent.parent
+#csv_report = BASE_DIR / "reports" / "csv_report.csv"
+#json_report = BASE_DIR / "reports" / "json_report.json"
+#xml_report = BASE_DIR / "reports" / "xml_report.xml"
 
-def generate_csv(findings: list[Finding]) -> None:
-    with open(csv_report, "w", newline="") as file:
+def generate_csv(findings: list[Finding], output_path:Path) -> None:
+    with output_path.open("w", newline="", encoding  ='utf-8') as file:
         writer = csv.DictWriter(file, fieldnames=["rule", "issue", "severity", "message"])
         writer.writeheader()
         writer.writerows(asdict(f) for f in findings)
 
 
-def generate_json(findings: list[Finding]) -> None:
-    with open(json_report, "w", newline="") as file:
+def generate_json(findings: list[Finding], output_path:Path) -> None:
+    with output_path.open("w", newline="", encoding='utf-8') as file:
         json.dump([asdict(f) for f in findings], file, indent=4)
 
 
-def generate_xml(findings: list[Finding]) -> None:
+def generate_xml(findings: list[Finding], output_path:Path) -> None:
     root = Element('report')
     
     for f in findings:
@@ -33,7 +33,7 @@ def generate_xml(findings: list[Finding]) -> None:
         SubElement(finding_element, "message").text = f.message
 
     tree = ElementTree(root)
-    tree.write(xml_report, encoding='utf-8', xml_declaration=True)
+    tree.write(output_path, encoding='utf-8', xml_declaration=True)
 
 
 def summarize_findings(findings: list[Finding]) -> None:
