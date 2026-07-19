@@ -72,15 +72,15 @@ def main():
                 if result:
                     findings.append(result)
 
-            logging.info("Generating Reports...")
-            if args.format in ("csv", "all"):
-                generate_csv(findings, args.report_dir/"csv_report.csv")
-            if args.format in ("json", "all"):
-                generate_json(findings, args.report_dir/"json_report.json")
-            if args.format in ("xml", "all"):    
-                generate_xml(findings, args.report_dir/"xml_report.xml")
-            summarize_findings(findings)
-            logging.info("Reports Generated.")
+        logging.info("Generating Reports...")
+        if args.format in ("csv", "all"):
+            generate_csv(findings, args.report_dir/"csv_report.csv")
+        if args.format in ("json", "all"):
+            generate_json(findings, args.report_dir/"json_report.json")
+        if args.format in ("xml", "all"):    
+            generate_xml(findings, args.report_dir/"xml_report.xml")
+        summarize_findings(findings)
+        logging.info("Reports Generated.")
     except FirewallAuditError as e:
         logging.error(e)
         print(e)
