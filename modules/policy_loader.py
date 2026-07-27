@@ -2,17 +2,26 @@
 from pathlib import Path
 import yaml
 from modules.module import Policy
-from modules.exceptions import PolicyLoadFail
+from modules.exceptions import PolicyLoadError
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 POLICY_FILE = BASE_DIR/"policies"/"firewall_policies.yaml"
 
 def load_policies() -> dict[str,Policy]:
+    """
+    Opens and reads a .yaml policy file and creates a dictionariy with the policy name
+    as the key, and a Policy dataclass object as the value.
+    Returns:
+        A dictionary with a string, Policy object key value pair.
+    Raises:
+        FileNotFoundError: if .yaml file is not found.
+    """
+    
     try:
         with POLICY_FILE.open("r", encoding="utf-8") as file:
             data = yaml.safe_load(file)
     except FileNotFoundError as e:
-        raise PolicyLoadFail(f"Failed to load YAML file.") from e
+        raise PolicyLoadError(f"Failed to load YAML file.") from e
     policies = {}
     for name, config in data["policies"].items():
         policies[name] = Policy(

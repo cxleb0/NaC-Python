@@ -10,6 +10,6 @@ class ConfigParseError(FirewallAuditError):
     """Raise error when XML parcing fails."""
     pass
 
-class PolicyLoadFail(FirewallAuditError):
+class PolicyLoadError(FirewallAuditError):
     """Raise error when policy loading fails"""
     pass

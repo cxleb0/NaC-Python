@@ -3,7 +3,7 @@ policies:
   any_any:
     enabled: true
     severity: HIGH
-    message: Any-Any Rule Detected.
+    message: Any-Any rule detected.
     
   logging:
     enabled: true
@@ -18,4 +18,4 @@ policies:
   disabled:
     enabled: true
     severity: LOW
-    message: Security Rule is disabled.
+    message: Security rule is disabled.

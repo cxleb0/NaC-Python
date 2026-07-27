@@ -4,6 +4,16 @@ from modules.module import FirewallRule
 from modules.exceptions import ConfigParseError
 
 def get_rules(content: str) -> list[FirewallRule]:
+    """
+    Parses a Firewall XML configuration file and extract firewall rules.
+    Args:
+         Content: The XML configuration as a string
+    Returns:
+         A list of FirewallRule dataclass objects.
+    Raises:
+         ConfigParseError: If xml is invalid or malformed.
+    """
+    
     try:
         root = xml.fromstring(content)
     except xml.ParseError as e:
