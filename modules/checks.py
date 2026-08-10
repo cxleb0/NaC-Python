@@ -12,6 +12,8 @@ def check_any_any(rule:FirewallRule,policy:Policy):
     return None
 
 def check_missing_description(rule:FirewallRule,policy:Policy):
+    if not policy.enabled:
+        return None
     if not rule.description:
         return Finding(
             rule =  rule.name,
@@ -22,6 +24,8 @@ def check_missing_description(rule:FirewallRule,policy:Policy):
     return None
 
 def check_logging(rule:FirewallRule,policy:Policy):
+    if not policy.enabled:
+        return None
     if not rule.log_end:
         return Finding(
             rule = rule.name,
@@ -32,6 +36,8 @@ def check_logging(rule:FirewallRule,policy:Policy):
     return None
 
 def check_disabled(rule:FirewallRule,policy:Policy):
+    if not policy.enabled:
+        return None
     if rule.disabled:
         return Finding(
             rule = rule.name,
