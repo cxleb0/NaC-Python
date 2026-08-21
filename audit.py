@@ -10,26 +10,26 @@ from modules.parser import get_rules
 from modules.policy_loader import load_policies
 from modules.report import generate_reports
 
-
+logger = logging.getLogger(__name__)
 def main():
     setup_logging()
     args = cli()
     try: 
-        logging.info("[*] Loading XML Configuration...")
+        logger.info("[*] Loading XML Configuration...")
         xml_content = load_config(args.config)
-        logging.info("[*] Parsing Firewall Rules...")
+        logger.info("[*] Parsing Firewall Rules...")
         rules = get_rules(xml_content)
-        logging.info(f"[*] Parsed {len(rules)} Rules...")
+        logger.info(f"[*] Parsed {len(rules)} Rules...")
     
-        logging.info("[*] Loading Policies...")
+        logger.info("[*] Loading Policies...")
         policies = load_policies()
         findings = generate_findings(rules, policies)
         
-        logging.info("[*] Generating Reports...")
+        logger.info("[*] Generating Reports...")
         generate_reports(findings, args)
-        logging.info("[*] Reports Generated.")
+        logger.info("[*] Reports Generated.")
     except FirewallAuditError as e:
-        logging.error(e)
+        logger.error(e)
         print(f"[!] {e}")
         sys.exit(1)
         
