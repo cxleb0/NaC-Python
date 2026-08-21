@@ -10,5 +10,11 @@
         "issue": "Disabled rule",
         "message": "Security rule is disabled.",
         "severity": "LOW"
+    },
+    {
+        "rule": "Any Any Rule",
+        "issue": "Any Any rule found",
+        "message": "Any-Any rule detected.",
+        "severity": "HIGH"
     }
 ]

@@ -1,4 +1,3 @@
-from modules.module import FirewallRule, Policy
 from modules.checks import (
     check_any_any,
     check_missing_description,
@@ -6,8 +5,7 @@ from modules.checks import (
     check_disabled
 )
 
-
-def generate_findings(rules: list[FirewallRule], policies: dict[str, Policy]) -> list[str]: 
+def generate_findings(rules, policies):
     rule_checks = {
             "any_any": check_any_any,
             "description": check_missing_description,
