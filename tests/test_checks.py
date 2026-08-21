@@ -1,15 +1,12 @@
 #!/usr/bin/env python3
-import pytest
-from pathlib import Path
-from modules.policy_loader import load_policies
-from modules.parser import get_rules
 from modules.checks import (
     check_any_any,
-    check_missing_description,
+    check_disabled,
     check_logging,
-    check_disabled
+    check_missing_description,
 )
 from modules.module import FirewallRule, Policy
+
 
 def test_any_any_policy_violations():
             

@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 from pathlib import Path
+
 from modules.exceptions import ConfigLoadError
+
 #file_path = Path("/home/t0rment/Documents/NaC-python/configs/config1.xml")
 
 #BASE_DIR = Path(__file__).resolve().parent.parent

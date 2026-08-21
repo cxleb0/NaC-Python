@@ -1,8 +1,11 @@
-import pytest
-from modules.parser import get_rules
 from pathlib import Path
-from modules.module import FirewallRule
+
+import pytest
+
 from modules.exceptions import ConfigParseError
+from modules.module import FirewallRule
+from modules.parser import get_rules
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 CONFIG_FILE = BASE_DIR / "tests" / "fixtures" /"test.xml"
 

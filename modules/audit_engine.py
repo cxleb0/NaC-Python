@@ -1,9 +1,10 @@
 from modules.checks import (
     check_any_any,
-    check_missing_description,
+    check_disabled,
     check_logging,
-    check_disabled
+    check_missing_description,
 )
+
 
 def generate_findings(rules, policies):
     rule_checks = {

@@ -1,4 +1,6 @@
-from modules.module import FirewallRule, Finding, Policy
+from modules.module import Finding, FirewallRule, Policy
+
+
 def check_any_any(rule:FirewallRule,policy:Policy):
     if not policy.enabled:
         return None

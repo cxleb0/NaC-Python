@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 import json
 import xml.etree.ElementTree as xml
-from pathlib import Path
+
 from modules.module import Finding
 from modules.reporter import (
     generate_csv,
     generate_json,
     generate_xml,
-    summarize_findings
 )
+
 findings = [Finding(
     rule = "Any Any rule",
     issue = "Any Any rule found",

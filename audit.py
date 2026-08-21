@@ -1,13 +1,14 @@
-import sys
 import logging
-from modules.report import generate_reports
+import sys
+
+from modules.audit_engine import generate_findings
 from modules.cli import cli
+from modules.exceptions import FirewallAuditError
 from modules.loader import load_config
+from modules.logging import setup_logging
 from modules.parser import get_rules
 from modules.policy_loader import load_policies
-from modules.audit_engine import generate_findings
-from modules.exceptions import FirewallAuditError
-from modules.logging import setup_logging
+from modules.report import generate_reports
 
 
 def main():

@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 import xml.etree.ElementTree as xml
-from modules.module import FirewallRule
+
 from modules.exceptions import ConfigParseError
+from modules.module import FirewallRule
+
 
 def get_rules(content: str) -> list[FirewallRule]:
     """
@@ -17,7 +19,7 @@ def get_rules(content: str) -> list[FirewallRule]:
     try:
         root = xml.fromstring(content)
     except xml.ParseError as e:
-        raise ConfigParseError(f"Error in parsing xml configuration.") from e
+        raise ConfigParseError("Error in parsing xml configuration.") from e
     entries = root.findall(".//rulebase/security/rules/entry")
     rules: list[FirewallRule] = []
     

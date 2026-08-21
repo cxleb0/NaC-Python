@@ -3,9 +3,8 @@ from modules.reporter import (
     generate_csv,
     generate_json,
     generate_xml,
-    summarize_findings
+    summarize_findings,
 )
-
 
 
 def generate_reports(findings, args):

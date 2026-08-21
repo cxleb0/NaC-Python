@@ -1,9 +1,11 @@
 import csv
 import json
-from xml.etree.ElementTree import Element, SubElement, ElementTree
-from pathlib import Path
-from modules.module import Finding
 from dataclasses import asdict
+from pathlib import Path
+from xml.etree.ElementTree import Element, ElementTree, SubElement
+
+from modules.module import Finding
+
 #BASE_DIR = Path(__file__).resolve().parent.parent
 #csv_report = BASE_DIR / "reports" / "csv_report.csv"
 #json_report = BASE_DIR / "reports" / "json_report.json"

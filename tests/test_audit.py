@@ -1,13 +1,5 @@
-import pytest
-from modules.module import FirewallRule, Policy, Finding
 from modules.audit_engine import generate_findings
-from modules.checks import (
-    check_any_any,
-    check_missing_description,
-    check_logging,
-    check_disabled
-)
-
+from modules.module import Finding, FirewallRule, Policy
 
 
 def test_generate_findings():

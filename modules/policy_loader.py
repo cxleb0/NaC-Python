@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 from pathlib import Path
+
 import yaml
-from modules.module import Policy
+
 from modules.exceptions import PolicyLoadError
+from modules.module import Policy
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 POLICY_FILE = BASE_DIR/"policies"/"firewall_policies.yaml"
@@ -21,7 +23,7 @@ def load_policies() -> dict[str,Policy]:
         with POLICY_FILE.open("r", encoding="utf-8") as file:
             data = yaml.safe_load(file)
     except FileNotFoundError as e:
-        raise PolicyLoadError(f"Failed to load YAML file.") from e
+        raise PolicyLoadError("Failed to load YAML file.") from e
     policies = {}
     for name, config in data["policies"].items():
         policies[name] = Policy(

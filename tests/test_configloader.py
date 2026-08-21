@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-import pytest
 from pathlib import Path
-from modules.loader import load_config
+
+import pytest
+
 from modules.exceptions import ConfigLoadError
+from modules.loader import load_config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 CONFIG_FILE = BASE_DIR / "tests" / "fixtures" / "test.xml"

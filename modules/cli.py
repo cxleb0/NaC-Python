@@ -1,5 +1,6 @@
 import argparse
 from pathlib import Path
+
 parser = argparse.ArgumentParser(description="Firewall Policy Engine")
 def cli():
     parser.add_argument(
