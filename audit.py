@@ -11,32 +11,30 @@ from modules.policy_loader import load_policies
 from modules.report import generate_reports
 
 logger = logging.getLogger(__name__)
+
+
 def main():
     setup_logging()
     args = cli()
-    try: 
+    try:
         logger.info("[*] Loading XML Configuration...")
         xml_content = load_config(args.config)
         logger.info("[*] Parsing Firewall Rules...")
         rules = get_rules(xml_content)
         logger.info(f"[*] Parsed {len(rules)} Rules...")
-    
+
         logger.info("[*] Loading Policies...")
         policies = load_policies()
         findings = generate_findings(rules, policies)
-        
+
         logger.info("[*] Generating Reports...")
         generate_reports(findings, args)
         logger.info("[*] Reports Generated.")
     except FirewallAuditError as e:
-        logger.error(e)
+        logger.error("Firewall Audit failed %s", e)
         print(f"[!] {e}")
         sys.exit(1)
-        
-if __name__ == '__main__':
+
+
+if __name__ == "__main__":
     main()
-
-
-
-
-
