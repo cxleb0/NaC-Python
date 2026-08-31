@@ -1,7 +1,7 @@
 from modules.policy_loader import load_policies
 
-#BASE_DIR = Path(__file__).resolve().parent.parent
-#YAML_FILE = BASE_DIR / "tests" / "fixtures" / "test_policies.yaml"
+# BASE_DIR = Path(__file__).resolve().parent.parent
+# YAML_FILE = BASE_DIR / "tests" / "fixtures" / "test_policies.yaml"
 
 """def test_policies():
     with YAML_FILE.open('r', encoding='utf-8') as file:
@@ -17,8 +17,9 @@ from modules.policy_loader import load_policies
             
         assert len(policies) > 0
         assert policies["any_any"]
-   """      
-        
+   """
+
+
 def test_policies():
     policies = load_policies()
     assert len(policies) > 0
@@ -28,6 +29,3 @@ def test_policies():
     assert policies["any_any"].enabled is True
     assert policies["any_any"].severity == "HIGH"
     assert policies["any_any"].message == "Any-Any rule detected."
-
-    
-    

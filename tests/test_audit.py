@@ -11,7 +11,7 @@ def test_generate_findings():
             application=["any"],
             description="This is an Any Any rule",
             disabled=False,
-            log_end=True
+            log_end=True,
         ),
         FirewallRule(
             name="Allow Web",
@@ -20,8 +20,8 @@ def test_generate_findings():
             application=["web-browsing"],
             description="This rule allows internet browsing.",
             disabled=False,
-            log_end=False
-        )
+            log_end=False,
+        ),
     ]
 
     policies = {
@@ -29,30 +29,29 @@ def test_generate_findings():
             name="any_any",
             enabled=True,
             severity="HIGH",
-            message="Any-Any rule detected." 
+            message="Any-Any rule detected.",
         ),
         "logging": Policy(
             name="logging",
             enabled=True,
             severity="MEDIUM",
-            message="Session-End-Logging disabled."
+            message="Session-End-Logging disabled.",
         ),
         "description": Policy(
             name="description",
             enabled=True,
             severity="MEDIUM",
-            message="Security rule missing description."
+            message="Security rule missing description.",
         ),
         "disabled": Policy(
             name="Disabled",
             enabled=True,
             severity="LOW",
-            message="Security rule is disabled."
-        )       
+            message="Security rule is disabled.",
+        ),
     }
-
 
     findings = generate_findings(rules, policies)
     assert len(findings) == 2
     assert isinstance(findings[0], Finding)
-    print(findings) 
+    print(findings)

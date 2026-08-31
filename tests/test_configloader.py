@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 from pathlib import Path
 
 import pytest
@@ -8,6 +7,7 @@ from modules.loader import load_config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 CONFIG_FILE = BASE_DIR / "tests" / "fixtures" / "test.xml"
+
 
 def test_configloader():
     content = load_config(CONFIG_FILE)

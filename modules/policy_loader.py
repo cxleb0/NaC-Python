@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 from pathlib import Path
 
 import yaml
@@ -7,9 +6,10 @@ from modules.exceptions import PolicyLoadError
 from modules.module import Policy
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-POLICY_FILE = BASE_DIR/"policies"/"firewall_policies.yaml"
+POLICY_FILE = BASE_DIR / "policies" / "firewall_policies.yaml"
 
-def load_policies() -> dict[str,Policy]:
+
+def load_policies() -> dict[str, Policy]:
     """
     Opens and reads a .yaml policy file and creates a dictionariy with the policy name
     as the key, and a Policy dataclass object as the value.
@@ -18,7 +18,7 @@ def load_policies() -> dict[str,Policy]:
     Raises:
         FileNotFoundError: if .yaml file is not found.
     """
-    
+
     try:
         with POLICY_FILE.open("r", encoding="utf-8") as file:
             data = yaml.safe_load(file)
@@ -29,8 +29,7 @@ def load_policies() -> dict[str,Policy]:
         policies[name] = Policy(
             name=name,
             enabled=config.get("enabled", False),
-            severity=config.get("severity","LOW"),
-            message=config.get("message","")            
+            severity=config.get("severity", "LOW"),
+            message=config.get("message", ""),
         )
     return policies
-     
