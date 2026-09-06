@@ -17,13 +17,13 @@
                 <entry name="Allow Web">
                   <description>Allow users to access the internet</description>
                   <source>
-                    <member>Internal</member>
+                    <member>any</member>
                   </source>
                   <destination>
                     <member>Internet</member>
                   </destination>
                   <application>
-                    <member>web-browsing</member>
+                    <member>any</member>
                   </application>
                   <disabled>no</disabled>
                   <log-end>yes</log-end>
