@@ -24,7 +24,7 @@ def main():
         logger.info(f"[*] Parsed {len(rules)} Rules...")
 
         logger.info("[*] Loading Policies...")
-        policies = load_policies()
+        policies = load_policies(args.policy)
         findings = generate_findings(rules, policies)
 
         logger.info("[*] Generating Reports...")

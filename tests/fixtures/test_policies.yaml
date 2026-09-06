@@ -3,7 +3,7 @@ policies:
   any_any:
     enabled: true
     severity: HIGH
-    message: Any-Any Rule Detected.
+    message: Any-Any rule detected.
 
   safe_rule:
     enabled: true

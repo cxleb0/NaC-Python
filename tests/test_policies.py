@@ -1,27 +1,11 @@
+from pathlib import Path
 from modules.policy_loader import load_policies
 
-# BASE_DIR = Path(__file__).resolve().parent.parent
-# YAML_FILE = BASE_DIR / "tests" / "fixtures" / "test_policies.yaml"
-
-"""def test_policies():
-    with YAML_FILE.open('r', encoding='utf-8') as file:
-        data = yaml.safe_load(file)
-    policies = {}
-    for name, config in data["policies"].items():
-        policies[name] = Policy(
-            name =name,
-            enabled=config.get("enabled"),
-            severity=config.get("severity"),
-            message=config.get("message"),
-        )
-            
-        assert len(policies) > 0
-        assert policies["any_any"]
-   """
-
+BASE_DIR = Path(__file__).resolve().parent.parent
+YAML_FILE = BASE_DIR / "tests" / "fixtures" / "test_policies.yaml"
 
 def test_policies():
-    policies = load_policies()
+    policies = load_policies(YAML_FILE)
     assert len(policies) > 0
     assert "any_any" in policies
     policy = policies["any_any"]

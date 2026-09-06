@@ -6,7 +6,14 @@ parser = argparse.ArgumentParser(description="Firewall Policy Engine")
 
 def cli():
     parser.add_argument(
-        "--config", required=True, help="Directory where XML configurations reside."
+        "--config",
+        required=True,
+        help="Directory where XML configurations reside."
+    )
+    parser.add_argument(
+        "--policy",
+        required=True,
+        help="Directory where yaml policies reside."
     )
     parser.add_argument(
         "--report-dir",

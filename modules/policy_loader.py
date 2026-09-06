@@ -5,11 +5,11 @@ import yaml
 from modules.exceptions import PolicyLoadError
 from modules.module import Policy
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-POLICY_FILE = BASE_DIR / "policies" / "firewall_policies.yaml"
+#BASE_DIR = Path(__file__).resolve().parent.parent
+#POLICY_FILE = BASE_DIR / "policies" / "firewall_policies.yaml"
 
 
-def load_policies() -> dict[str, Policy]:
+def load_policies(policy_path:Path) -> dict[str, Policy]:
     """
     Opens and reads a .yaml policy file and creates a dictionariy with the policy name
     as the key, and a Policy dataclass object as the value.
@@ -20,7 +20,7 @@ def load_policies() -> dict[str, Policy]:
     """
 
     try:
-        with POLICY_FILE.open("r", encoding="utf-8") as file:
+        with open(policy_path, "r", encoding="utf-8") as file:
             data = yaml.safe_load(file)
     except FileNotFoundError as e:
         raise PolicyLoadError("Failed to load YAML file.") from e
