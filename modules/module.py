@@ -26,3 +26,10 @@ class Policy:
     enabled: bool
     severity: str
     message: str
+
+@dataclass
+class RuleFieldChange:
+    name: str
+    field: str
+    old_value: object
+    new_value: object

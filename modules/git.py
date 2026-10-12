@@ -1,4 +1,5 @@
 import subprocess
+from modules.module import (FirewallRule, RuleFieldChange)
 
 
 def get_diff(old_version: str, new_version:str, file_path:str):
@@ -52,10 +53,32 @@ def list_revision_changes(old_rules:list, new_rules:list):
                 changes["unmodified"].append(rule)
             else:
                 #modified
-                changes["modified"].append(rule)
+                changes["modified"].append((old_rule, rule))
     for rule in old_rules:
         if rule.name not in newrule_name:
             #check for deleted
-                changes["deleted"].append(rule)
+            changes["deleted"].append(rule)
     return changes
-    
+
+def get_field_changes(old_rule:FirewallRule, new_rule:FirewallRule):
+    changes = []
+    #if statement printing rule that changed
+    if old_rule.source != new_rule.source:
+        print(f"source: {old_rule.source} -> {new_rule.source}")
+        changes.append(RuleFieldChange(old_rule.name, "source", old_rule.source, new_rule.source))
+    if old_rule.destination != new_rule.destination:
+        print(f"destination: {old_rule.destination} -> {new_rule.destination}")
+        changes.append(RuleFieldChange(old_rule.name, "destination", old_rule.destination, new_rule.destination))
+    if (old_rule.application != new_rule.application):
+        print(f"application: {old_rule.application} -> {new_rule.application}")
+        changes.append(RuleFieldChange(old_rule.name, "application", old_rule.application, new_rule.application))
+    if old_rule.description != new_rule.description:
+        print(f"description: {old_rule.description} -> {new_rule.description}")
+        changes.append(RuleFieldChange(old_rule.name, "description", old_rule.description, new_rule.description))
+    if old_rule.disabled != new_rule.disabled:
+        print(f"disabled: {old_rule.disabled} -> {new_rule.disabled}")
+        changes.append(RuleFieldChange(old_rule.name, "disabled", old_rule.disabled, new_rule.disabled))
+    if old_rule.log_end != new_rule.log_end:
+        print(f"logging enabled: {old_rule.log_end} -> {new_rule.log_end}")
+        changes.append(RuleFieldChange(old_rule.name, "logging", old_rule.log_end, new_rule.log_end))
+    return changes

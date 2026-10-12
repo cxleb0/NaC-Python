@@ -1,6 +1,7 @@
 from modules.git import (get_diff,
                          get_file_at_revision,
-                         list_revision_changes)
+                         list_revision_changes,
+                         get_field_changes)
 from modules.parser import get_rules
 
 
@@ -26,3 +27,5 @@ print("CHANGES: ")
 changed_rules = list_revision_changes(old_rules, new_rules)
 print(changed_rules)
 
+for old_rule, new_rule in changed_rules["modified"]:
+    get_field_changes(old_rule, new_rule)
