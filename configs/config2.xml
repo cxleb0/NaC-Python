@@ -103,6 +103,21 @@
                   <log-end>yes</log-end>
                 </entry>
 
+                <entry name="Allow DHCP">
+                  <source>
+                    <member>Internal</member>
+                  </source>
+                  <destination>
+                    <member>dhcp-server</member>
+                  </destination>
+                  <application>
+                    <member>dhcp</member>
+                  </application>
+                  <disabled>no</disabled>
+                  <log-end>yes</log-end>
+                </entry>
+
+
               </rules>
               
             </security>
