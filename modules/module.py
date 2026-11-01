@@ -27,6 +27,7 @@ class Policy:
     severity: str
     message: str
 
+
 @dataclass
 class RuleFieldChange:
     name: str

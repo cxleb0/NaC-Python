@@ -29,8 +29,12 @@ def get_rules(content: str) -> list[FirewallRule]:
         rule = FirewallRule(
             name=name,
             source=[s.text for s in entry.findall("./source/member") if s.text],
-            destination=[d.text for d in entry.findall("./destination/member") if d.text],
-            application=[a.text for a in entry.findall("./application/member") if a.text],
+            destination=[
+                d.text for d in entry.findall("./destination/member") if d.text
+            ],
+            application=[
+                a.text for a in entry.findall("./application/member") if a.text
+            ],
             description=(entry.findtext("description") or "").strip(),
             disabled=((entry.findtext("disabled") or "no").lower() == "yes"),
             log_end=((entry.findtext("log-end") or "no").lower() == "yes"),

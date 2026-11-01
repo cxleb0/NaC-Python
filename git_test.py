@@ -1,13 +1,15 @@
-from modules.git import (get_diff,
-                         get_file_at_revision,
-                         list_revision_changes,
-                         get_field_changes,
-                         gitcli)
-
+from modules.audit_engine import generate_findings
+from modules.git import (
+    compare_findings,
+    get_diff,
+    get_field_changes,
+    get_file_at_revision,
+    gitcli,
+    list_revision_changes,
+)
 from modules.parser import get_rules
 from modules.policy_loader import load_policies
-from modules.audit_engine import generate_findings
- 
+
 args = gitcli()
 difference = get_diff(args.old_config, args.new_config, "configs/config2.xml")
 old_revision = get_file_at_revision(args.old_config, "configs/config2.xml")
@@ -17,11 +19,10 @@ new_rules = get_rules(new_revision)
 changed_rules = list_revision_changes(old_rules, new_rules)
 
 
-
-#listing modified rules
+# listing modified rules
 all_fw_modified = []
 for old_rule, new_rule in changed_rules["modified"]:
-    
+
     fwchanges = get_field_changes(old_rule, new_rule)
     all_fw_modified.extend(fwchanges)
 
@@ -34,7 +35,7 @@ for change in all_fw_modified:
     )
 
 
-#listing added rules
+# listing added rules
 all_fw_added = []
 for rule in changed_rules["added"]:
     all_fw_added.append(rule)
@@ -50,8 +51,8 @@ for change in all_fw_added:
         f"   disabled: {change.disabled}\n"
         f"   logging: {change.log_end}"
     )
-    
-#listing deleted rules
+
+# listing deleted rules
 all_fw_deleted = []
 for rule in changed_rules["deleted"]:
     all_fw_deleted.append(rule)
@@ -71,5 +72,25 @@ for change in all_fw_deleted:
 policies = load_policies(args.policy)
 old_findings = generate_findings(old_rules, policies)
 new_findings = generate_findings(new_rules, policies)
-print(old_findings)
-print(new_findings)
+# print(old_findings)
+# print(new_findings)
+
+results = compare_findings(old_findings, new_findings)
+print("Findings: ")
+print("\nFINDING COMPARISON")
+print("------------------------------")
+
+for category, findings in results.items():
+    print(f"\n{category.upper()} ({len(findings)}):")
+
+    if not findings:
+        print("  None")
+        continue
+
+    for finding in findings:
+        print(
+            f"  Rule: {finding.rule}\n"
+            f"  Issue: {finding.issue}\n"
+            f"  Severity: {finding.severity}\n"
+            f"  Message: {finding.message}\n"
+        )

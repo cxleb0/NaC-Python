@@ -1,6 +1,6 @@
-import pytest
-from modules.module import (FirewallRule, RuleFieldChange)
 from modules.git import list_revision_changes
+from modules.module import FirewallRule
+
 old_rule = FirewallRule(
     name="Allow Web",
     source=["Internal"],
@@ -8,7 +8,7 @@ old_rule = FirewallRule(
     application=["web-browsing"],
     description="Allow web traffic",
     disabled=False,
-    log_end=True
+    log_end=True,
 )
 
 new_rule = FirewallRule(
@@ -18,8 +18,9 @@ new_rule = FirewallRule(
     application=["web-browsing"],
     description="Allow web traffic",
     disabled=False,
-    log_end=True
+    log_end=True,
 )
+
 
 def test_unmodified_rule():
     old_rules = [old_rule]
@@ -32,6 +33,7 @@ def test_unmodified_rule():
     assert len(results["added"]) == 0
     assert len(results["deleted"]) == 0
 
+
 def test_added_rule():
     new_rule = FirewallRule(
         name="Allow DHCP",
@@ -40,7 +42,7 @@ def test_added_rule():
         application=["DHCP"],
         description="Allow DHCP traffic",
         disabled=False,
-        log_end=True
+        log_end=True,
     )
     old_rules = []
     new_rules = [new_rule]
@@ -51,6 +53,7 @@ def test_added_rule():
     assert len(results["added"]) == 1
     assert len(results["deleted"]) == 0
 
+
 def test_modified_rule():
     new_rule = FirewallRule(
         name="Allow Web",
@@ -59,7 +62,7 @@ def test_modified_rule():
         application=["web-browsing"],
         description="Allow web traffic",
         disabled=True,
-        log_end=True
+        log_end=True,
     )
     old_rules = [old_rule]
     new_rules = [new_rule]
@@ -69,6 +72,7 @@ def test_modified_rule():
     assert len(results["modified"]) == 1
     assert len(results["added"]) == 0
     assert len(results["deleted"]) == 0
+
 
 def test_deleted_rule():
     new_rules = []
