@@ -16,5 +16,11 @@
         "issue": "Any Any rule found",
         "message": "Any-Any rule detected.",
         "severity": "HIGH"
+    },
+    {
+        "rule": "Allow DHCP",
+        "issue": "Missing Description",
+        "message": "Security rule missing description.",
+        "severity": "MEDIUM"
     }
 ]

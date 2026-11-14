@@ -112,6 +112,77 @@ def compare_findings(old_findings, new_findings) -> dict:
 parser = argparse.ArgumentParser(description="Arguments")
 
 
+def list_changed_rules(changed_rules):
+    all_fw_modified = []
+    for old_rule, new_rule in changed_rules["modified"]:
+
+        fwchanges = get_field_changes(old_rule, new_rule)
+        all_fw_modified.extend(fwchanges)
+
+    print(f"modified rules ({len(changed_rules['modified'])}):")
+    for change in all_fw_modified:
+        print(
+            f"{change.name}: "
+            f"{change.field}: "
+            f"{change.old_value} -> {change.new_value}"
+        )
+
+
+    # listing added rule
+    all_fw_added = []
+    for rule in changed_rules["added"]:
+        all_fw_added.append(rule)
+        
+    print(f"\nadded rules ({len(all_fw_added)}): ")
+    for change in all_fw_added:
+        print(
+            f" {change.name}\n"
+            f"   source: {change.source}\n"
+            f"   destination: {change.destination}\n"
+            f"   application: {change.application}\n"
+            f"   description: {change.description}\n"
+            f"   disabled: {change.disabled}\n"
+            f"   logging: {change.log_end}"
+        )
+
+    # listing deleted rules
+    all_fw_deleted = []
+    for rule in changed_rules["deleted"]:
+        all_fw_deleted.append(rule)
+
+    print(f"\ndeleted rules ({len(all_fw_deleted)}): ")
+    for change in all_fw_deleted:
+        print(
+            f" {change.name}\n"
+            f"   source: {change.source}\n"
+            f"   destination: {change.destination}\n"
+            f"   application: {change.application}\n"
+            f"   description: {change.description}\n"
+            f"   disabled: {change.disabled}\n"
+            f"   logging: {change.log_end}"
+        )
+
+def display_findings(results):
+    print("Findings: ")
+    print("\nFINDING COMPARISON")
+    print("------------------------------")
+
+    for category, findings in results.items():
+        print(f"\n{category.upper()} ({len(findings)}):")
+        
+        if not findings:
+            print("  None")
+            continue
+
+        for finding in findings:
+            print(
+                f"  Rule: {finding.rule}\n"
+                f"  Issue: {finding.issue}\n"
+                f"  Severity: {finding.severity}\n"
+                f"  Message: {finding.message}\n"
+            ) 
+
+
 def gitcli():
     parser.add_argument(
         "--old_config",
