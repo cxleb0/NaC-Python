@@ -1,8 +1,10 @@
 class FirewallAuditError(Exception):
     """Base exception for audit tool."""
-    
+
+
 class FirewallGitAuditError(Exception):
     """Exception for Git audit tool."""
+
 
 class ConfigLoadError(FirewallAuditError):
     """Raise error when config file cannot be loaded."""

@@ -3,22 +3,20 @@ import sys
 
 from modules.audit_engine import generate_findings
 from modules.cli import cli
-from modules.exceptions import FirewallAuditError
+from modules.exceptions import FirewallAuditError, FirewallGitAuditError
+from modules.git import (
+    compare_findings,
+    display_findings,
+    get_file_at_revision,
+    list_changed_rules,
+    list_revision_changes,
+)
 from modules.loader import load_config
 from modules.logging import setup_logging
 from modules.parser import get_rules
 from modules.policy_loader import load_policies
 from modules.report import generate_reports
-from modules.git import (
-    compare_findings,
-    get_diff,
-    get_field_changes,
-    get_file_at_revision,
-    gitcli,
-    list_revision_changes,
-    list_changed_rules,
-    display_findings
-)
+
 logger = logging.getLogger(__name__)
 
 
@@ -28,7 +26,7 @@ def main():
     if args.git:
         try:
             run_git_audit(args)
-        except FirewallGitAuditError as e:
+        except (FirewallGitAuditError, FirewallAuditError) as e:
             logger.error("Firewall configuration comparison failed %s", e)
             print(f"[!] {e}")
             sys.exit(1)
@@ -40,20 +38,22 @@ def main():
             print(f"[!] {e}")
             sys.exit(1)
 
+
 def run_standard_audit(args):
     logger.info("[*] Loading XML Configuration...")
     xml_content = load_config(args.config)
     logger.info("[*] Parsing Firewall Rules...")
     rules = get_rules(xml_content)
     logger.info(f"[*] Parsed {len(rules)} Rules...")
-    
+
     logger.info("[*] Loading Policies...")
     policies = load_policies(args.policy)
     findings = generate_findings(rules, policies)
-    
+
     logger.info("[*] Generating Reports...")
     generate_reports(findings, args)
-    logger.info("[*] Reports Generated.")   
+    logger.info("[*] Reports Generated.")
+
 
 def run_git_audit(args):
     logger.info("[*] Loading old Git configuration.")
@@ -67,7 +67,7 @@ def run_git_audit(args):
 
     logger.info("[*] Parsing new firewall configuration...")
     new_rules = get_rules(new_xml)
-    
+
     logger.info("Generating firewall rule changes...")
     changed_rules = list_revision_changes(old_rules, new_rules)
     list_changed_rules(changed_rules)
@@ -80,9 +80,7 @@ def run_git_audit(args):
     new_findings = generate_findings(new_rules, policies)
     results = compare_findings(old_findings, new_findings)
     display_findings(results)
-    
-    
-    
+
 
 if __name__ == "__main__":
     main()

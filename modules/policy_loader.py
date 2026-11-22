@@ -5,9 +5,6 @@ import yaml
 from modules.exceptions import PolicyLoadError
 from modules.module import Policy
 
-# BASE_DIR = Path(__file__).resolve().parent.parent
-# POLICY_FILE = BASE_DIR / "policies" / "firewall_policies.yaml"
-
 
 def load_policies(policy_path: Path) -> dict[str, Policy]:
     """
@@ -23,7 +20,16 @@ def load_policies(policy_path: Path) -> dict[str, Policy]:
         with open(policy_path, "r", encoding="utf-8") as file:
             data = yaml.safe_load(file)
     except FileNotFoundError as e:
-        raise PolicyLoadError("Failed to load YAML file.") from e
+        raise PolicyLoadError("Failed to load YAML file. " f"{e}") from e
+    except yaml.YAMLError as e:
+        raise PolicyLoadError("Malformed YAML file. " f"{e}") from e
+    except IsADirectoryError as e:
+        raise PolicyLoadError("No file specified." f"{e}")
+    if not isinstance(data, dict) or not isinstance(data.get("policies"), dict):
+        raise PolicyLoadError(
+            f"Invalid policy file structure: '{policy_path}'. "
+            "Expected a top-level 'policies' dictionary."
+        )
     policies = {}
     for name, config in data["policies"].items():
         policies[name] = Policy(

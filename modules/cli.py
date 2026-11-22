@@ -24,19 +24,15 @@ def cli():
         help="Format to generate reports.",
     )
     parser.add_argument(
-        "--git",
-        action="store_true",
-        help="Enable Git-based configuration auditing."        
+        "--git", action="store_true", help="Enable Git-based configuration auditing."
     )
     parser.add_argument(
-        "--old_config",
-        help="Git revision containing the older firewall configuration."
+        "--old_config", help="Git revision containing the older firewall configuration."
     )
     parser.add_argument(
-        "--new_config",
-        help="Git revsion containing the newer firewall configuration."
+        "--new_config", help="Git revsion containing the newer firewall configuration."
     )
-    args=parser.parse_args()
+    args = parser.parse_args()
 
     if args.git:
         if not args.old_config or not args.new_config:

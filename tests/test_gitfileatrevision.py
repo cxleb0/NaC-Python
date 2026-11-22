@@ -1,7 +1,6 @@
-import subprocess
-
 import pytest
 
+from modules.exceptions import FirewallGitAuditError
 from modules.git import get_file_at_revision
 
 
@@ -13,10 +12,10 @@ def test_get_file_at_revision():
 
 
 def test_get_file_at_revision_invalid_revision():
-    with pytest.raises(subprocess.CalledProcessError):
+    with pytest.raises(FirewallGitAuditError):
         get_file_at_revision("invalid_revision", "configs/config2.xml")
 
 
 def test_get_file_at_revision_invalid_file():
-    with pytest.raises(subprocess.CalledProcessError):
+    with pytest.raises(FirewallGitAuditError):
         get_file_at_revision("71de3d5", "configs/nonexistent.xml")
